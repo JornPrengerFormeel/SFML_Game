@@ -8,11 +8,11 @@ These instructions will get you a copy of the project up and running on your loc
 -g++\
 ```sudo apt-get install g++```\
 -SFML\
-```sudo apt-get install libsfml-dev```\
+```sudo apt-get install libsfml-dev```
 
 ## Installing
 compile the main.cpp file into a main.o file using g++:\
 ```g++ -c main.cpp```\
 compile the main.o file into an executable called window using g++:\
-```g++ main.o -o window -lsfml-graphics -lsfml-window -lsfml-system```\
+```g++ main.o -o window -lsfml-graphics -lsfml-window -lsfml-system```
 
