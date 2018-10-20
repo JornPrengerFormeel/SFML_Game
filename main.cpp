@@ -7,7 +7,7 @@ bool border(sf::Shape &shape) {
     sf::Vector2f temp = shape.getPosition();
     int x = temp.x + 1;
     int y = temp.y + 1;
-    if (x > 950)
+    if (x > 951)
     {
         shape.setPosition(50,shape.getPosition().y);
         return false;
