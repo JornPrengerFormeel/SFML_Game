@@ -1,13 +1,15 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-sf::CircleShape shape;
+sf::CircleShape shape; //define shape early so it can be used in border function
 
 bool border(sf::Shape &shape) {
     sf::Vector2f temp = shape.getPosition();
     int x = temp.x + 1;
     int y = temp.y + 1;
-    if (x > 951)
+    //split position vector into int x and y
+
+    if (x > 950)
     {
         shape.setPosition(50,shape.getPosition().y);
         return false;
@@ -28,6 +30,7 @@ bool border(sf::Shape &shape) {
         return false;
     }
     return true;
+    //if shape reaches border of screen move to other side of screen
 }
 
 double movement() {
@@ -36,6 +39,7 @@ double movement() {
     {
         speed = 2;
     }
+    //define speed value, when shift is pressed double it
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && border(shape))
     {
         shape.move(-speed,0);
@@ -53,6 +57,7 @@ double movement() {
         shape.move(0,speed);
     }
     return 0;
+    //use wasd input to move x and y of shape
 }
 
 int main() {
@@ -64,7 +69,7 @@ int main() {
     shape.setFillColor(sf::Color(150, 250, 150));
     shape.setOutlineThickness(5);
     shape.setOutlineColor(sf::Color(150, 100, 200));
-
+    //define vallues window, line and set shape fill colors
 
     while(window.isOpen())
     {
@@ -80,19 +85,21 @@ int main() {
         lines[1].position = sf::Vector2f(sf::Mouse::getPosition(window));
         lines[0].color = sf::Color::Blue;
         lines[1].color = sf::Color::Blue;
+        //set line position and default color
 
         movement();
 
         window.clear(sf::Color(60, 60, 60));
 
-        window.draw(shape);
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
             lines[0].color = sf::Color::Red;
             lines[1].color = sf::Color::Red;
         }
-        window.draw(lines);
+        //when mouse pressed change line color
 
+        window.draw(shape);
+        window.draw(lines);
         window.display();
         }
 
