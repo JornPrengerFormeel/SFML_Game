@@ -16,6 +16,6 @@ Compile the main.cpp file into a main.o file using g++:\
 ```$ g++ -c main.cpp```\
 Compile the main.o file into an executable called window using g++:\
 ```$ g++ main.o -o window -lsfml-graphics -lsfml-window -lsfml-system```\
-To run the program do:
+To run the program do:\
 ```$ ./window```
 
