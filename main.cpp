@@ -10,20 +10,20 @@ bool border(sf::Shape &shape) {
   int y = temp.y + 1;
   // split position vector into int x and y
 
-  if (x > 950) {
-    shape.setPosition(50, shape.getPosition().y);
+  if (x > 1050) {
+    shape.setPosition(-49, shape.getPosition().y);
     return false;
   }
-  if (x < 50) {
-    shape.setPosition(949, shape.getPosition().y);
+  if (x < -50) {
+    shape.setPosition(1049, shape.getPosition().y);
     return false;
   }
-  if (y > 950) {
-    shape.setPosition(shape.getPosition().x, 50);
+  if (y > 1050) {
+    shape.setPosition(shape.getPosition().x, -49);
     return false;
   }
-  if (y < 50) {
-    shape.setPosition(shape.getPosition().x, 949);
+  if (y < -50) {
+    shape.setPosition(shape.getPosition().x, 1049);
     return false;
   }
   return true;
@@ -70,8 +70,7 @@ int main() {
         window.close();
       }
     }
-    lines[0].position =
-        sf::Vector2f(shape.getPosition().x, shape.getPosition().y);
+    lines[0].position = sf::Vector2f(shape.getPosition().x, shape.getPosition().y);
     lines[1].position = sf::Vector2f(sf::Mouse::getPosition(window));
     lines[0].color = sf::Color::Blue;
     lines[1].color = sf::Color::Blue;
