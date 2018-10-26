@@ -1,8 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include <SFML/Audio.hpp>
 
-sf::CircleShape shape; // define shape early so it can be used in border
-                       // function
+sf::CircleShape shape; // define shape early so it can be used in border function
 
 bool border(sf::Shape &shape) {
   sf::Vector2f temp = shape.getPosition();
@@ -53,22 +53,29 @@ double movement() {
 }
 
 int main() {
-  sf::RenderWindow window(sf::VideoMode(1000, 1000), "My window");
-  sf::Vertex line[2];
-  sf::VertexArray lines(sf::Lines, 2);
-  shape.setRadius(50);
-  shape.setOrigin(50, 50);
-  shape.setFillColor(sf::Color(150, 250, 150));
-  shape.setOutlineThickness(5);
-  shape.setOutlineColor(sf::Color(150, 100, 200));
-  // define vallues window, line and set shape fill colors
+    sf::SoundBuffer soundBuffer;
+    if (!soundBuffer.loadFromFile("gun.wav"))
+        return -1;
+    sf::Sound sound;
+    sound.setBuffer(soundBuffer);
 
-  while (window.isOpen()) {
-    sf::Event event;
-    while (window.pollEvent(event)) {
-      if (event.type == sf::Event::Closed) {
-        window.close();
-      }
+    sf::RenderWindow window(sf::VideoMode(1000, 1000), "My window");
+    window.setKeyRepeatEnabled(false); 
+    sf::Vertex line[2];
+    sf::VertexArray lines(sf::LineStrip, 2);
+
+    shape.setRadius(50);
+    shape.setOrigin(50, 50);
+    shape.setFillColor(sf::Color(150, 250, 150));
+    shape.setOutlineThickness(5);
+    shape.setOutlineColor(sf::Color(150, 100, 200));
+
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+        if (event.type == sf::Event::Closed) {
+            window.close();
+        }
     }
     lines[0].position = sf::Vector2f(shape.getPosition().x, shape.getPosition().y);
     lines[1].position = sf::Vector2f(sf::Mouse::getPosition(window));
@@ -80,16 +87,17 @@ int main() {
 
     window.clear(sf::Color(60, 60, 60));
 
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-      lines[0].color = sf::Color::Red;
-      lines[1].color = sf::Color::Red;
+    if (event.type == sf::Event::MouseButtonPressed)
+    {
+            sound.play();
+            lines[0].color = sf::Color::Red;
+            lines[1].color = sf::Color::Red;
     }
-    // when mouse pressed change line color
-
+    // when mouse pressed change line color and play sound
     window.draw(lines);
     window.draw(shape);
     window.display();
-  }
+    }
 
-  return 0;
+    return 0;
 }
