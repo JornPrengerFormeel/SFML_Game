@@ -54,8 +54,8 @@ double movement() {
 
 int main() {
     sf::SoundBuffer soundBuffer;
-    if (!soundBuffer.loadFromFile("gun.wav"))
-        return -1;
+    //if (!soundBuffer.loadFromFile("gun.wav"))
+    //    return -1;
     sf::Sound sound;
     sound.setBuffer(soundBuffer);
 
